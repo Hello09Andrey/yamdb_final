@@ -1,3 +1,5 @@
+from django.db import IntegrityError
+from rest_framework import serializers
 from rest_framework import viewsets, status, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -41,9 +43,6 @@ from reviews.models import (
     Review,
 )
 from .filters import TitlesFilter
-
-from django.db import IntegrityError
-from rest_framework import serializers
 
 
 class TitleViewSet(viewsets.ModelViewSet):
@@ -96,12 +95,6 @@ class GenresViewSet(viewsets.ModelViewSet):
 
     def update(self, request, *args, **kwargs):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
-
-
-class WrongUsernameOrEmail(Exception):
-    """Email или username уже заняты."""
-
-    pass
 
 
 class RegisterView(APIView):
